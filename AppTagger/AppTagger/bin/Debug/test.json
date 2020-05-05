@@ -1,0 +1,38 @@
+{
+  "Id": 6,
+  "Nom": "root",
+  "Fils": [
+    {
+      "Id": 2,
+      "Nom": "famille",
+      "Fils": [
+        {
+          "Id": 0,
+          "Nom": "julie",
+          "Fils": []
+        },
+        {
+          "Id": 1,
+          "Nom": "pascal",
+          "Fils": []
+        }
+      ]
+    },
+    {
+      "Id": 4,
+      "Nom": "Vacances",
+      "Fils": [
+        {
+          "Id": 3,
+          "Nom": "dunkerque",
+          "Fils": []
+        }
+      ]
+    },
+    {
+      "Id": 5,
+      "Nom": "chien",
+      "Fils": []
+    }
+  ]
+}

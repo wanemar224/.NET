@@ -1,0 +1,12 @@
+H:\C#\AppTagger\AppTagger\bin\Debug\AppTagger.exe.config
+H:\C#\AppTagger\AppTagger\bin\Debug\AppTagger.exe
+H:\C#\AppTagger\AppTagger\bin\Debug\AppTagger.pdb
+H:\C#\AppTagger\AppTagger\obj\Debug\AppTagger.csprojAssemblyReference.cache
+H:\C#\AppTagger\AppTagger\obj\Debug\AppTagger.Form1.resources
+H:\C#\AppTagger\AppTagger\obj\Debug\AppTagger.Properties.Resources.resources
+H:\C#\AppTagger\AppTagger\obj\Debug\AppTagger.csproj.GenerateResource.cache
+H:\C#\AppTagger\AppTagger\obj\Debug\AppTagger.exe
+H:\C#\AppTagger\AppTagger\obj\Debug\AppTagger.pdb
+H:\C#\AppTagger\AppTagger\bin\Debug\Newtonsoft.Json.dll
+H:\C#\AppTagger\AppTagger\bin\Debug\Newtonsoft.Json.xml
+H:\C#\AppTagger\AppTagger\obj\Debug\AppTagger.csproj.CopyComplete
