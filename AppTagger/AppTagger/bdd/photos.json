@@ -1,1 +1,14 @@
-"H:\\\\c_c_trevi.jpg""H:\\\\c_trevi.jpg"
+{
+  "Photos": [
+    {
+      "Tags": [
+        5,
+        3,
+        12
+      ],
+      "CheminAbsolu": "H:\\\\C#\\AppTagger\\AppTagger\\galerie",
+      "Nom": "automne.jpg",
+      "Chemin": "H:\\\\C#\\AppTagger\\AppTagger\\galerieautomne.jpg"
+    }
+  ]
+}

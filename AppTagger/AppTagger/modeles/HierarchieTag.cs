@@ -13,11 +13,7 @@ namespace AppTagger.modeles
     public sealed class HierarchieTag 
     {
         Tag root;
-        private HierarchieTag()
-        {
-            
-        }
-
+        private HierarchieTag() { }
         public static HierarchieTag Instance { get { return Nested.instance; } }
 
         public Tag Hierarchi { get { return root; } set { root = (Tag)value.Clone(); } }
@@ -45,7 +41,7 @@ namespace AppTagger.modeles
         {
             if (tag.Nom.Equals(nom))
                 return tag;
-            if (tag.Fils.Length == 0)
+            if (tag.Fils.Count == 0)
                 return null;
             Tag res = new Tag();
             foreach (Tag fils in tag.Fils)
@@ -63,8 +59,11 @@ namespace AppTagger.modeles
             return null;
         }
 
-        public void ajouterTag(Tag pere)
+        public void ajouterTag(Tag pere, Tag fils)
         {
+            Tag p = this.trouveParNom( pere.Nom );
+            if (p != null)
+                p.ajouterNouveauFils( fils );
 
         }
 

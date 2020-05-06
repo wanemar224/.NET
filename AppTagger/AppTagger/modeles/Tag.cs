@@ -8,43 +8,56 @@ namespace AppTagger
 {
     public class Tag
     {
+        private static int _idSuivant = 0;
+
         int _id;
         string _nom;
-        Tag [] _fils;
+        List<Tag> _fils;
 
-        public Tag ( int id, string nom, Tag [] fils )
+        public Tag (string nom, List<Tag> fils )
         {
-            this.Id = id;
+            this.Id =idSuivant();
             this.Nom = nom;
             this.Fils = fils;
         }
-
         public Tag()
         {
-            this.Id = -1;
+            this.Id = idSuivant();
         }
 
         public object Clone ( )
         {
-            return new Tag( this.Id, this.Nom, (Tag [])this.Fils.Clone() );
+            return new Tag(this.Nom, this.Fils);
         }
 
         public virtual void Affiche ( string indent )
         {
             Console.WriteLine( "{0}{1} [", indent, this.Nom );
-            for (int i = 0; i < this.Fils.Length; i++)
+            for (int i = 0; i < this.Fils.Count; i++)
             {
                 this.Fils [i].Affiche( indent + "    " );
             }
             Console.WriteLine( "{0}]", indent );
         }
 
+        public void ajouterNouveauFils(Tag fils)
+        {
+            if (!this.Fils.Contains( fils ))
+                this.Fils.Add( fils );
+            //sinon levé une exception
+        }
+
+        private static int idSuivant()
+        {
+            _idSuivant++;
+            return _idSuivant;
+        }
         /////Propriété/////
 
         public int Id
         {
             get { return _id; }
-            set { _id = value; }
+            set { this._id = value; }
         }
 
         public string Nom
@@ -53,10 +66,10 @@ namespace AppTagger
             set { _nom = value; }
         }
 
-        public Tag [] Fils
+        public List<Tag> Fils
         {
-            get { return _fils; }
-            set { _fils = (Tag [])value.Clone(); }
+            get { return this._fils; }
+            set {this._fils = value; }
         }
     }
 }

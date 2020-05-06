@@ -37,9 +37,9 @@ namespace AppTagger.modeles
 
             //item = image.GetPropertyItem( Convert.ToInt32(0x010E) );
             string ids = "";
-            foreach (Tag tag in photo.Tags)
+            foreach (int tag in photo.Tags)
             {
-                ids += tag.Id + ",";
+                ids += tag + ",";
             }
             var data = encoding.GetBytes(ids);
           

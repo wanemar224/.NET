@@ -1,0 +1,45 @@
+{
+  "Hierarchi": {
+    "Id": 8,
+    "Nom": "root",
+    "Fils": [
+      {
+        "Id": 3,
+        "Nom": "famille",
+        "Fils": [
+          {
+            "Id": 1,
+            "Nom": "julie",
+            "Fils": []
+          },
+          {
+            "Id": 2,
+            "Nom": "pascal",
+            "Fils": []
+          }
+        ]
+      },
+      {
+        "Id": 5,
+        "Nom": "vacances",
+        "Fils": [
+          {
+            "Id": 4,
+            "Nom": "dunkerque",
+            "Fils": []
+          },
+          {
+            "Id": 12,
+            "Nom": "nouveauTag",
+            "Fils": []
+          }
+        ]
+      },
+      {
+        "Id": 6,
+        "Nom": "chien",
+        "Fils": []
+      }
+    ]
+  }
+}
