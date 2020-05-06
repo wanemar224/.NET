@@ -6,17 +6,22 @@ using System.Threading.Tasks;
 
 namespace AppTagger
 {
-    class Tag
+    public class Tag
     {
-        uint _id;
+        int _id;
         string _nom;
         Tag [] _fils;
 
-        public Tag ( uint id, string nom, Tag [] fils )
+        public Tag ( int id, string nom, Tag [] fils )
         {
             this.Id = id;
             this.Nom = nom;
             this.Fils = fils;
+        }
+
+        public Tag()
+        {
+            this.Id = -1;
         }
 
         public object Clone ( )
@@ -36,7 +41,7 @@ namespace AppTagger
 
         /////Propriété/////
 
-        public uint Id
+        public int Id
         {
             get { return _id; }
             set { _id = value; }

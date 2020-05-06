@@ -65,6 +65,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="modeles\HierarchieTag.cs" />
     <Compile Include="modeles\Persistance.cs" />
     <Compile Include="modeles\Photo.cs" />
     <Compile Include="Program.cs" />
