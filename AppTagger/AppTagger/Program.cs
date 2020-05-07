@@ -7,7 +7,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using Newtonsoft.Json;
 using AppTagger.modeles;
-using AppTagger.modeles.bdd;
 using System.IO;
 
 
@@ -15,68 +14,59 @@ namespace AppTagger
 {
     static class Program
     {
+
+      
         /// <summary>
         /// Point d'entrée principal de l'application.
         /// </summary>
         [STAThread]
         static void Main ( )
-        {
-            Tag julie = new Tag("julie", new List<Tag> { } );
-            Tag pascal = new Tag( "pascal", new List<Tag> { } );
-            Tag famille = new Tag(  "famille", new List<Tag> { julie, pascal } );
-
-            Tag dunkerque = new Tag(  "dunkerque", new List<Tag> { } );
-            Tag vacances = new Tag( "vacances", new List<Tag> { dunkerque } );
-
-
-            Tag chien = new Tag( "chien", new List<Tag> { } );
-
-            Tag root = new Tag( "root", new List<Tag> { famille, vacances, chien } );
-           
-            
-
-            HierarchieTag ht = HierarchieTag.Instance;
-           
-            ht.Hierarchi = root;
-
-            Photo p = new Photo( @"H:\\C#\AppTagger\AppTagger\galerie", "automne.jpg" );
-            p.ajouterUnTag( "vacances" );
-            p.ajouterUnTag( "famille" );
-
-            p.ajouterNouveauTag( "nouveauTag", vacances );
+        { 
 
             Galerie g = Galerie.Instance;
-            g.ajouterPhoto( p );
+            g.Charger();
+            g.EnregistrerTagDansFichiers();
+            g.Photos [0].AjouterUnTag( new Tag( "julie", new Tag [] { } ) ); 
+            g.EnregistrerTagDansFichiers();
+            g.Sauvegarder();
 
-            PersistanceJson persistance = new PersistanceJson();
-            Tag charger = new Tag();
-            charger = persistance.chargerHierarchie();
-            Galerie.Instance = persistance.chargerGalerie();
-            
-            
 
-            /*Tag t = ht.trouveParNom("vacances");
-            if (t == null)
-                Console.WriteLine("on est bon");
-            else t.Affiche("");
 
-            ht.ajouterTag( t, new Tag("NouveauFils", new List<Tag> { } ) );
-            t.Affiche( "" );
 
-            ht.Hierarchi.Affiche( "" );
 
-            Photo p = new Photo( @"H:\\C#\AppTagger\AppTagger\galerie", "automne.jpg" );
+            /*Tag julie = new Tag("julie", new Tag [] { } );
+            Tag pascal = new Tag( "pascal", new Tag [] { } );
+            Tag famille = new Tag( "famille", new Tag [] { julie, pascal } );
+
+            Tag dunkerque = new Tag( "dunkerque", new Tag [] { } );
+            Tag vacances = new Tag( "vacances", new Tag [] { dunkerque } );
+
+
+            Tag chien = new Tag( "chien", new Tag [] { } );
+
+            Tag root = new Tag( "root", new Tag [] { famille, vacances, chien } );
+
+            Photo p = new Photo(@"H:\\.NET-master\AppTagger\AppTagger\galerie", "lune.jpg");
             p.toString();
-            p.ajouterUnTag( "vacances" );
-            p.ajouterUnTag( "famille" );
-
-            p.ajouterNouveauTag( "nouveauTag", vacances );
-
+            p.AjouterUnTag( vacances );
+            p.AjouterUnTag( famille);
+            p.AjouterUnTag(pascal);
             p.toString();
 
+            HierarchieTag ht = HierarchieTag.Instance;
+            //ht.Hierarchi = root;
+            ht.Charger();
+            
+            Galerie g = Galerie.Instance;
+            g.AjouterPhoto(p);
+            g.Sauvegarder();
+            g.Charger();
+            foreach(Photo photo in g.Photos)
+            {
+                photo.toString();
+            }*/
 
 
-            ht.Hierarchi.Affiche( "" );*/
             //Persistance.sauvegarderTag(root, @"C:\Users\sami-_000\Documents\workspace-visual\.NET\AppTagger\AppTagger\bdd\tags.json");
             //ht.sauvegarderTag(@"C:\Users\sami-_000\Documents\workspace-visual\.NET\AppTagger\AppTagger\bdd\tags.json");
             //ht.chargerTag(@"C:\Users\sami-_000\Documents\workspace-visual\.NET\AppTagger\AppTagger\bdd\tags.json");

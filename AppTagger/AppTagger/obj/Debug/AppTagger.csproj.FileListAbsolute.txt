@@ -23,3 +23,15 @@ C:\Users\sami-_000\Documents\workspace-visual\.NET\AppTagger\AppTagger\obj\Debug
 C:\Users\sami-_000\Documents\workspace-visual\.NET\AppTagger\AppTagger\obj\Debug\AppTagger.csproj.CopyComplete
 C:\Users\sami-_000\Documents\workspace-visual\.NET\AppTagger\AppTagger\obj\Debug\AppTagger.exe
 C:\Users\sami-_000\Documents\workspace-visual\.NET\AppTagger\AppTagger\obj\Debug\AppTagger.pdb
+H:\.NET-master\AppTagger\AppTagger\bin\Debug\AppTagger.exe.config
+H:\.NET-master\AppTagger\AppTagger\bin\Debug\AppTagger.exe
+H:\.NET-master\AppTagger\AppTagger\bin\Debug\AppTagger.pdb
+H:\.NET-master\AppTagger\AppTagger\bin\Debug\Newtonsoft.Json.dll
+H:\.NET-master\AppTagger\AppTagger\bin\Debug\Newtonsoft.Json.xml
+H:\.NET-master\AppTagger\AppTagger\obj\Debug\AppTagger.Form1.resources
+H:\.NET-master\AppTagger\AppTagger\obj\Debug\AppTagger.Properties.Resources.resources
+H:\.NET-master\AppTagger\AppTagger\obj\Debug\AppTagger.csproj.GenerateResource.cache
+H:\.NET-master\AppTagger\AppTagger\obj\Debug\AppTagger.csproj.CopyComplete
+H:\.NET-master\AppTagger\AppTagger\obj\Debug\AppTagger.exe
+H:\.NET-master\AppTagger\AppTagger\obj\Debug\AppTagger.pdb
+H:\.NET-master\AppTagger\AppTagger\obj\Debug\AppTagger.csprojAssemblyReference.cache

@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\AppTagger",
+    "\\AppTagger\\AppTagger",
+    "\\AppTagger\\AppTagger\\modeles",
+    "\\AppTagger\\AppTagger\\modeles\\persistance"
+  ],
+  "SelectedNode": "\\AppTagger\\AppTagger\\Program.cs",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using AppTagger.modeles.persistance;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,11 @@ namespace AppTagger.modeles
     public sealed class HierarchieTag 
     {
         Tag root;
-        private HierarchieTag() { }
+        private HierarchieTag() 
+        { 
+            this.root = new Tag("root", new Tag [] { } );
+        }
+
         public static HierarchieTag Instance { get { return Nested.instance; } }
 
         public Tag Hierarchi { get { return root; } set { root = (Tag)value.Clone(); } }
@@ -23,49 +28,44 @@ namespace AppTagger.modeles
             internal static readonly HierarchieTag instance = new HierarchieTag();
         }
 
-        public void chargerTag(string path)
+        public void Charger()
         {
-            string contenu = File.ReadAllText(path);
-            this.root = JsonConvert.DeserializeObject<Tag>(contenu);
+            Persistance p = new PersistanceJson();
+            this.root = p.ChargerHierarchie();
         }
 
-        public void sauvegarderTag(string path)
+        public void Sauvegarder()
         {
-            File.WriteAllText(path, JsonConvert.SerializeObject(this.root, Formatting.Indented));
+            Persistance p = new PersistanceJson();
+            p.SauvergarderHierarchie(this.root);
         }
-        public Tag trouveParNom(string nom)
+        public Tag TrouveParNom(string nom)
         {
-            return trouveParNom(this.root, nom);
+            return TrouveParNom(this.root, nom);
         }
-        private Tag trouveParNom(Tag tag, string nom)
+        private Tag TrouveParNom(Tag tag, string nom)
         {
             if (tag.Nom.Equals(nom))
                 return tag;
-            if (tag.Fils.Count == 0)
-                return null;
             Tag res = new Tag();
             foreach (Tag fils in tag.Fils)
             {
-                res = trouveParNom(fils, nom);
-                if (res != null) return fils;
+                return TrouveParNom(fils, nom);
             }
-            
-            return res;
-                
+            throw new Exception( "Tag non trouvé !" );
+
         }
 
-        private Tag trouve( Tag tag, Predicate<Tag> trouve)
+        private Tag Trouve( Tag tag, Predicate<Tag> trouve)
         {
             return null;
         }
 
-        public void ajouterTag(Tag pere, Tag fils)
+        public void AjouterTag(string pere, string fils)
         {
-            Tag p = this.trouveParNom( pere.Nom );
-            if (p != null)
-                p.ajouterNouveauFils( fils );
-
+            Tag f = new Tag(fils, new Tag[] { });
+            Tag p = this.TrouveParNom(pere);
+            p.AjouterFils( f );
         }
-
     }
 }

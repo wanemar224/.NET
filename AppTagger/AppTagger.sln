@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppTagger", "AppTagger\AppTagger.csproj", "{ADB2BEC7-5261-4310-9377-1A4DA96CEF39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppTaggerTest", "AppTaggerTest\AppTaggerTest.csproj", "{87D69E88-CE7A-4A2C-BC1A-C48729607F07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{ADB2BEC7-5261-4310-9377-1A4DA96CEF39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADB2BEC7-5261-4310-9377-1A4DA96CEF39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADB2BEC7-5261-4310-9377-1A4DA96CEF39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87D69E88-CE7A-4A2C-BC1A-C48729607F07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87D69E88-CE7A-4A2C-BC1A-C48729607F07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87D69E88-CE7A-4A2C-BC1A-C48729607F07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87D69E88-CE7A-4A2C-BC1A-C48729607F07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

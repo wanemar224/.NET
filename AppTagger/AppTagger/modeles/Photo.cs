@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,10 @@ namespace AppTagger.modeles
         private string _nom;
         private List<int> _tags;
 
+        public Photo() 
+        {
+            this._tags = new List<int>();
+        }
         public Photo(string cheminAbsolu, string nom,  List<int> tags)
         {
             this._cheminAbsolu = cheminAbsolu;
@@ -46,36 +52,55 @@ namespace AppTagger.modeles
 
         public string Chemin
         {
-            get { return this.CheminAbsolu + this.Nom; }
+            get { return this.CheminAbsolu + "\\" + this.Nom; }
         }
 
-        public void ajouterUnTag ( Tag tag )
+        public void AjouterUnTag ( Tag tag )
         {
             if (!this.Tags.Contains( tag.Id ))
                 this.Tags.Add( tag.Id );
-        }
-        public void ajouterUnTag(string nom)
-        {
-            HierarchieTag ht = HierarchieTag.Instance;
-            Tag t = ht.trouveParNom( nom );
-
-            if (t != null)
-                this.ajouterUnTag( t );
+            else
+                throw new Exception( "Tag existe déja !" );
         }
 
-        public void ajouterNouveauTag ( string nom, Tag pere)
-        {
-            Tag nouveau = new Tag(nom, new List<Tag>() );
-            HierarchieTag ht = HierarchieTag.Instance;
-            ht.ajouterTag( pere, nouveau );
-
-            this.ajouterUnTag( nouveau );
-        }
         public void supprimerUnTag(Tag tag)
         {
             if (this.Tags.Contains( tag.Id ))
                 this.Tags.Remove( tag.Id );
+            else
+                throw new Exception( "Tag n'existe pas !" );
         }
+
+        public void EnregistrerTagDansFichier()
+        {
+            ASCIIEncoding encoding;
+
+
+            Image image = new Bitmap( this.Chemin );
+            PropertyItem item = image.PropertyItems [0];
+            item.Id = 0x9286;
+
+            encoding = new ASCIIEncoding();
+
+            string ids = "";
+            foreach (int tag in this.Tags)
+            {
+                ids += tag + ",";
+            }
+            var data = encoding.GetBytes( ids );
+
+
+            item.Len = data.Length;
+            item.Value.DefaultIfEmpty();
+            item.Value = data;
+            item.Type = 2;
+            image.SetPropertyItem( item );
+
+            this.Nom = "photoTagger_" + this.Nom;
+
+            image.Save( this.Chemin, ImageFormat.Jpeg );
+        }
+
         public void toString()
         {
             Console.WriteLine( "chemin de la photo :" + this.CheminAbsolu + this.Nom);

@@ -65,11 +65,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="modeles\bdd\Persistance.cs" />
-    <Compile Include="modeles\bdd\PersistanceJson.cs" />
     <Compile Include="modeles\Galerie.cs" />
     <Compile Include="modeles\HierarchieTag.cs" />
-    <Compile Include="modeles\Persistance.cs" />
+    <Compile Include="modeles\Persist.cs" />
+    <Compile Include="modeles\persistance\Persistance.cs" />
+    <Compile Include="modeles\persistance\PersistanceJson.cs" />
     <Compile Include="modeles\Photo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

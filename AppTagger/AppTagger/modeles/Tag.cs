@@ -12,52 +12,69 @@ namespace AppTagger
 
         int _id;
         string _nom;
-        List<Tag> _fils;
+        Tag [] _fils;
 
-        public Tag (string nom, List<Tag> fils )
+        public Tag ( string nom, Tag [] fils )
         {
-            this.Id =idSuivant();
+            this.Id = IdSuivant();
             this.Nom = nom;
             this.Fils = fils;
         }
+
         public Tag()
         {
-            this.Id = idSuivant();
+            this.Id = IdSuivant();
         }
 
         public object Clone ( )
         {
-            return new Tag(this.Nom, this.Fils);
+            return new Tag( this.Nom, (Tag [])this.Fils.Clone() );
         }
 
         public virtual void Affiche ( string indent )
         {
-            Console.WriteLine( "{0}{1} [", indent, this.Nom );
-            for (int i = 0; i < this.Fils.Count; i++)
+            Console.WriteLine( "{0}{1} : {2} [", indent, this.Nom, this.Id);
+            for (int i = 0; i < this.Fils.Length; i++)
             {
                 this.Fils [i].Affiche( indent + "    " );
             }
             Console.WriteLine( "{0}]", indent );
         }
 
-        public void ajouterNouveauFils(Tag fils)
-        {
-            if (!this.Fils.Contains( fils ))
-                this.Fils.Add( fils );
-            //sinon levé une exception
-        }
-
-        private static int idSuivant()
+        private static int IdSuivant()
         {
             _idSuivant++;
             return _idSuivant;
+        }
+
+        public void AjouterFils( Tag fils)
+        {
+            if (!this.EstPresent( fils ))
+            {
+                Tag [] copy = new Tag [this.Fils.Length + 1];
+                copy [this.Fils.Length] = fils;
+                this.Fils.CopyTo( copy, 0 );
+                this.Fils = copy;
+            }
+            else
+                throw new Exception( "Ce tag existe déjà !" );
+        }
+
+        private bool EstPresent(Tag tag)
+        {
+            for(int i=0; i<this.Fils.Length; i++)
+            {
+                if (this.Fils [i].Nom.Equals( tag.Nom ))
+                    return true;
+            }
+            return false;
         }
         /////Propriété/////
 
         public int Id
         {
             get { return _id; }
-            set { this._id = value; }
+            set { _id = value; }
         }
 
         public string Nom
@@ -66,10 +83,10 @@ namespace AppTagger
             set { _nom = value; }
         }
 
-        public List<Tag> Fils
+        public Tag [] Fils
         {
-            get { return this._fils; }
-            set {this._fils = value; }
+            get { return _fils; }
+            set { _fils = (Tag [])value.Clone(); }
         }
     }
 }
