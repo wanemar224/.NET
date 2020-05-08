@@ -61,17 +61,26 @@ namespace AppTagger.modeles
                 cheminsPhoto.Add(p.Chemin);
             }
             persist.SauvegarderGalerie(cheminsPhoto);
+            this.EnregistrerTagDansFichiers();
         }
 
         public void Charger()
         {
-            Persistance p = new PersistanceJson();
-            foreach(string chemin in p.ChargerGalerie())
-            {
-                Photo photo = new Photo(chemin);
-                photo.RecupererTagDepuisFichier();
-                this.AjouterPhoto(photo);
-            }
+            //try
+           // {
+                Persistance p = new PersistanceJson();
+                foreach (string chemin in p.ChargerGalerie())
+                {
+                    Photo photo = new Photo( chemin );
+                    photo.RecupererTagDepuisFichier();
+                    this.AjouterPhoto( photo );
+                }
+            //}
+            //catch(Exception ex)
+            //{
+            //    throw ex;
+            //}
+            
         }
 
         public void EnregistrerTagDansFichiers ( )

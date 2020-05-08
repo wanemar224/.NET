@@ -9,75 +9,54 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 
 namespace AppTagger
 {
     public partial class Form1 : Form
     {
+        static int i = 0;
         public Form1 ( )
         {
             InitializeComponent();
         }
 
-        private void btn_print_Click ( object sender, EventArgs e )
+        private void ChargeeImages_Click ( object sender, EventArgs e )
         {
-
-            List<string> tags= new List<string>();
-            tags.Add( "Italie");
-            tags.Add( "tag deux" );
-            tags.Add( "tienssss" );
-
-            TaggerImage treviTag = new TaggerImage( @"H:\\trevi.jpg", tags );
-
-            treviTag.AjouterUnTag( "Amoureux" );
-            //treviTag.supprimerTag( "Italie" );
-            //treviTag.supprimerTousLesTags();
-
-            treviTag.modifierUnTag( "Italie", "Rome" );
-            MessageBox.Show( treviTag.toString() );
-
-            try
+            using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "All files |*.*", ValidateNames = true, Multiselect = true })
             {
-                System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
-                // Create an Image object. 
-                Image theImage = new Bitmap( "H:\\treviv.jpg" );
-
-                // Get the PropertyItems property from image.
-                PropertyItem [] propItems = theImage.PropertyItems;
-                
-                foreach (PropertyItem item in propItems)
+                if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    
-                        Console.WriteLine( "L'id : 0x0" + item.Id.ToString( "x" ) );
-                        Console.WriteLine( "Taille du tag :" + item.Len );
-                        Console.WriteLine( "valeur du tag$ " + encoding.GetString( item.Value ) );
+                    foreach (string f in ofd.FileNames)
+                    {
+
+                        imageList1.Images.Add( Image.FromFile( f ) );
+                        ListViewItem item = new ListViewItem();
+                        item.Text = Path.GetFileName( f );
+                        item.ImageIndex = i++;
+                        listView1.Items.Add( item );
+
+
+
+                    }
                 }
             }
-            catch (Exception)
-            {
-                MessageBox.Show( "There was an error." +
-                    "Make sure the path to the image file is valid." );
-            }
-            /*
-            // Create an Image object. 
-            Image image = new Bitmap( @"H:\\trevi.jpg" );
-            System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
 
+        }
 
-            PropertyItem item = image.GetPropertyItem( Convert.ToInt32(0x010E)  );
-            var data = encoding.GetBytes( "Mon tag => Vaccance" );
+     
+        private void listView1_SelectedIndexChanged ( object sender, EventArgs e )
+        {
+            int i = this.listView1.FocusedItem.Index;
 
-            item.Len = data.Length;
-            item.Value = data;
+            this.pictureBox1.Image = this.imageList1.Images [i];
+        }
 
-            image.SetPropertyItem( item );
+        private void pictureBox1_Click ( object sender, EventArgs e )
+        {
+            Console.WriteLine( this.pictureBox1.Image.Width + "x" + this.pictureBox1.Image.Height );
+       
 
-            
-            string description = encoding.GetString( item.Value );
-            MessageBox.Show( "L'id : 0x0" + item.Id.ToString( "x" ) + "\n" + "La description de cette image est : " + description +"\n"+ "Taille du tag :" + item.Len );*/
-            //Console.WriteLine("L'id : 0x0"+item.Id.ToString("x"));
-            //Console.WriteLine( "La description de cette image est : " + description );
-            //Console.WriteLine( "Taille du tag :" + item.Len );
         }
     }
 }

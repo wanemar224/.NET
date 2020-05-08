@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -34,14 +35,16 @@ namespace AppTagger.modeles
                 this.CheminAbsolu = c;
                 this.Nom = chemin[chemin.Length - 1];
             }
-           
-            
+
+
+
         }
         public Photo(string cheminAbsolu, string nom,  List<int> tags)
         {
             this._cheminAbsolu = cheminAbsolu;
             this._tags = tags;
             this.Nom = nom;
+
         }
 
         public Photo(string cheminAbsolu, string nom)
@@ -51,6 +54,14 @@ namespace AppTagger.modeles
             this.Nom = nom;
         }
 
+        private void EnregistrerMini()
+        {
+            Image image = new Bitmap( this.Chemin );
+            Image mini = image.GetThumbnailImage( image.Width / 4, image.Height / 4, ( ) => { return true; }, IntPtr.Zero );
+            mini.Save( this.CheminMini, ImageFormat.Jpeg );
+            image.Dispose();
+            mini.Dispose();
+        }
         public List<int> Tags
         {
             get { return this._tags; }
@@ -74,6 +85,11 @@ namespace AppTagger.modeles
             get { return this.CheminAbsolu + this.Nom; }
         }
 
+        public string CheminMini
+        {
+            get { return this.CheminAbsolu + "mini_" + this.Nom; }
+        }
+
         public void AjouterUnTag ( Tag tag )
         {
             if (!this.Tags.Contains( tag.Id ))
@@ -92,12 +108,21 @@ namespace AppTagger.modeles
 
         public void RecupererTagDepuisFichier()
         {
-            Image image = new Bitmap(this.Chemin);
-            PropertyItem item = image.PropertyItems [0];
-            item.Id = 0x9286;
+            try
+            {
+                Image image = new Bitmap( this.CheminMini );
+                PropertyItem item = image.PropertyItems [0];
+                item.Id = 0x9286;
 
-            string description = Encoding.UTF8.GetString(item.Value, 0, item.Value.Length);
-            this.Tags = RecupererIdTag(description);
+                string description = Encoding.UTF8.GetString( item.Value, 0, item.Value.Length );
+                this.Tags = RecupererIdTag( description );
+                image.Dispose();
+            }
+            catch(FileNotFoundException ex)
+            {
+                this.EnregistrerMini();
+            }
+           
         }
 
         private List<int> RecupererIdTag(string idTags)
@@ -121,6 +146,7 @@ namespace AppTagger.modeles
         {
             ASCIIEncoding encoding;
             Image image = new Bitmap( this.Chemin );
+            Image mini = image.GetThumbnailImage( image.Width / 4, image.Height / 4, ( ) => { return true; }, IntPtr.Zero );
             PropertyItem item = image.PropertyItems [0];
             item.Id = 0x9286;
 
@@ -138,15 +164,19 @@ namespace AppTagger.modeles
             item.Value = data;
             item.Type = 2;
             image.SetPropertyItem( item );
+            mini.SetPropertyItem( item );
 
-            this.Nom = "photoTagger_" + this.Nom;
+            string cheminMini = this.CheminAbsolu + "mini_" + this.Nom;
+            
 
-            image.Save( this.Chemin, ImageFormat.Jpeg );
+            mini.Save( cheminMini, ImageFormat.Jpeg );
+            image.Dispose();
+            mini.Dispose();
         }
 
         public void toString()
         {
-            Console.WriteLine( "chemin de la photo :" + this.Chemin);
+            Console.WriteLine( "chemin de la photo :" + this.CheminMini);
             Console.Write( "tags : " );
             foreach(int tag in this.Tags)
             {

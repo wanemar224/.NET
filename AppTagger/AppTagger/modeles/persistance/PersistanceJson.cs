@@ -14,14 +14,25 @@ namespace AppTagger.modeles.persistance
         const string CHEMINPHOTOS = @"..\..\bdd\photos.json";
         public List<string> ChargerGalerie()
         {
-            string contenu = File.ReadAllText(CHEMINPHOTOS);
-            return JsonConvert.DeserializeObject<List<string>>(contenu);
+            if(File.Exists(CHEMINPHOTOS))
+            {
+                string contenu = File.ReadAllText( CHEMINPHOTOS );
+                return JsonConvert.DeserializeObject<List<string>>( contenu );
+            }
+            throw new FileNotFoundException();
+            
         }
 
         public Tag ChargerHierarchie()
         {
-            string contenu = File.ReadAllText(CHEMINHIERARCHIE);
-            return JsonConvert.DeserializeObject<Tag>(contenu);
+            if (File.Exists( CHEMINHIERARCHIE ))
+            {
+                string contenu = File.ReadAllText( CHEMINHIERARCHIE );
+                if (contenu.Length == 0)
+                    throw new Exception( "fichier vide" );
+                return JsonConvert.DeserializeObject<Tag>( contenu );
+            }
+            throw new FileNotFoundException();
         }
 
         public void SauvegarderGalerie(List<string> cheminsPhoto)
@@ -31,7 +42,7 @@ namespace AppTagger.modeles.persistance
 
         public void SauvergarderHierarchie(Tag root)
         {
-            File.WriteAllText(CHEMINPHOTOS, JsonConvert.SerializeObject(root, Formatting.Indented));
+            File.WriteAllText(CHEMINHIERARCHIE, JsonConvert.SerializeObject(root, Formatting.Indented));
         }
     }
 }

@@ -30,8 +30,16 @@ namespace AppTagger.modeles
 
         public void Charger()
         {
-            Persistance p = new PersistanceJson();
-            this.root = p.ChargerHierarchie();
+            try
+            {
+                Persistance p = new PersistanceJson();
+                this.root = p.ChargerHierarchie();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         public void Sauvegarder()

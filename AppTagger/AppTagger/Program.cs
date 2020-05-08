@@ -24,9 +24,47 @@ namespace AppTagger
         {
 
             Galerie g = Galerie.Instance;
-            g.Charger();
-            g.Photos[0].toString();
-            
+            HierarchieTag ht = HierarchieTag.Instance;
+            try
+            {
+                g.Charger();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine( ex.Message );
+            }
+            try
+            {
+                ht.Charger();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine( ex.Message );
+            }
+
+            /*ht.AjouterTag( "root", "vacances" );
+            ht.AjouterTag( "root", "famille" );
+            ht.AjouterTag( "vacances", "bali" );
+
+            ht.Hierarchi.Affiche( "" );
+
+            g.AjouterPhoto( new Photo( @"..\..\galerie\panda.jpg" ) );
+            g.TrouverPhoto( "panda.jpg" ).AjouterUnTag( ht.TrouveParNom( "vacances" ) );
+
+            g.TrouverPhoto( "panda.jpg" ).toString();
+
+            ht.Sauvegarder();
+            g.Sauvegarder();
+            */
+            //g.Phoos[0].toString();
+            //g.Photos [1].toString();
+
+            //g.Photos [0].AjouterUnTag( new Tag( "marouana", new Tag [] { } ) );
+            //g.Sauvegarder();
+
+
+
+
             //Photo p2 = new Photo(@"..\..\galerie", "panda.jpg");
 
             /*g.AjouterPhoto(p);
@@ -82,9 +120,9 @@ namespace AppTagger
             //Persistance.sauvegarderPhoto( p, @"C:\Users\sami-_000\Documents\workspace-visual\.NET\AppTagger\AppTagger\bdd\photos.json");
             //Persistance.chargerPhoto(@"C:\Users\sami-_000\Documents\workspace-visual\.NET\AppTagger\AppTagger\galerie\", "c_lune.jpg");
             //recupererRoot.Affiche( "" );
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault( false );
-            //Application.Run( new Form1() );
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault( false );
+            Application.Run( new Form1() );
 
 
         }
