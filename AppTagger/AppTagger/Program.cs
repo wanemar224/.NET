@@ -21,15 +21,22 @@ namespace AppTagger
         /// </summary>
         [STAThread]
         static void Main ( )
-        { 
+        {
 
             Galerie g = Galerie.Instance;
             g.Charger();
-            g.EnregistrerTagDansFichiers();
-            g.Photos [0].AjouterUnTag( new Tag( "julie", new Tag [] { } ) ); 
-            g.EnregistrerTagDansFichiers();
-            g.Sauvegarder();
+            g.Photos[0].toString();
+            
+            //Photo p2 = new Photo(@"..\..\galerie", "panda.jpg");
 
+            /*g.AjouterPhoto(p);
+            g.AjouterPhoto(p2);
+
+            g.Photos [0].AjouterUnTag( new Tag( "julie", new Tag [] { } ) );
+            g.Photos[0].EnregistrerTagDansFichier();
+            g.Sauvegarder();*:
+
+            
 
 
 

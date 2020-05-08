@@ -1,13 +1,4 @@
 [
-  {
-    "Tags": [
-      5,
-      3,
-      2,
-      1
-    ],
-    "CheminAbsolu": "H:\\\\.NET-master\\AppTagger\\AppTagger\\galerie",
-    "Nom": "photoTagger_photoTagger_lune.jpg",
-    "Chemin": "H:\\\\.NET-master\\AppTagger\\AppTagger\\galerie\\photoTagger_photoTagger_lune.jpg"
-  }
+  "..\\..\\galerie\\photoTagger_lune.jpg",
+  "..\\..\\galerie\\panda.jpg"
 ]

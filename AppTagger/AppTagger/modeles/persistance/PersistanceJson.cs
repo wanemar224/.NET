@@ -10,12 +10,12 @@ namespace AppTagger.modeles.persistance
 {
     class PersistanceJson : Persistance
     {
-        const string CHEMINHIERARCHIE = @"H:\.NET-master\AppTagger\AppTagger\bdd\tags.json";
-        const string CHEMINPHOTOS = @"H:\.NET-master\AppTagger\AppTagger\bdd\photos.json";
-        public List<Photo> ChargerGalerie()
+        const string CHEMINHIERARCHIE = @"..\..\bdd\tags.json";
+        const string CHEMINPHOTOS = @"..\..\bdd\photos.json";
+        public List<string> ChargerGalerie()
         {
             string contenu = File.ReadAllText(CHEMINPHOTOS);
-            return JsonConvert.DeserializeObject<List<Photo>>(contenu);
+            return JsonConvert.DeserializeObject<List<string>>(contenu);
         }
 
         public Tag ChargerHierarchie()
@@ -24,9 +24,9 @@ namespace AppTagger.modeles.persistance
             return JsonConvert.DeserializeObject<Tag>(contenu);
         }
 
-        public void SauvegarderGalerie()
+        public void SauvegarderGalerie(List<string> cheminsPhoto)
         {
-            File.WriteAllText(CHEMINPHOTOS, JsonConvert.SerializeObject(Galerie.Instance.Photos, Formatting.Indented));
+            File.WriteAllText(CHEMINPHOTOS, JsonConvert.SerializeObject(cheminsPhoto, Formatting.Indented));
         }
 
         public void SauvergarderHierarchie(Tag root)

@@ -11,7 +11,7 @@ namespace AppTagger.modeles.persistance
         Tag ChargerHierarchie();
         void SauvergarderHierarchie(Tag root);
 
-        List<Photo> ChargerGalerie();
-        void SauvegarderGalerie();
+        List<string> ChargerGalerie();
+        void SauvegarderGalerie(List<string> cheminsPhoto) ;
     }
 }

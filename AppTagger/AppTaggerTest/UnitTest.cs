@@ -103,7 +103,7 @@ namespace AppTaggerTest
             Assert.AreEqual( nbPhotoAvantAjout, g.Photos.Count );
         }
 
-        [TestMethod]
+       /* [TestMethod]
         public void TestHierarchieTag_ChargerHierarchie()
         {
             HierarchieTag ht = HierarchieTag.Instance;
@@ -111,6 +111,6 @@ namespace AppTaggerTest
 
             Assert.IsNotNull( ht.Hierarchi );
         }
-
+        */
     }
 }

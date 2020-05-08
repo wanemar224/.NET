@@ -1,21 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "H:\\.NET-master\\AppTagger\\AppTaggerTest\\AppTaggerTest.csproj": {}
+    "C:\\Users\\sami-_000\\Documents\\workspace-visual\\.NET\\AppTagger\\AppTaggerTest\\AppTaggerTest.csproj": {}
   },
   "projects": {
-    "H:\\.NET-master\\AppTagger\\AppTaggerTest\\AppTaggerTest.csproj": {
+    "C:\\Users\\sami-_000\\Documents\\workspace-visual\\.NET\\AppTagger\\AppTaggerTest\\AppTaggerTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\.NET-master\\AppTagger\\AppTaggerTest\\AppTaggerTest.csproj",
+        "projectUniqueName": "C:\\Users\\sami-_000\\Documents\\workspace-visual\\.NET\\AppTagger\\AppTaggerTest\\AppTaggerTest.csproj",
         "projectName": "AppTaggerTest",
-        "projectPath": "H:\\.NET-master\\AppTagger\\AppTaggerTest\\AppTaggerTest.csproj",
-        "packagesPath": "C:\\Users\\X\\.nuget\\packages\\",
-        "outputPath": "H:\\.NET-master\\AppTagger\\AppTaggerTest\\obj\\",
+        "projectPath": "C:\\Users\\sami-_000\\Documents\\workspace-visual\\.NET\\AppTagger\\AppTaggerTest\\AppTaggerTest.csproj",
+        "packagesPath": "C:\\Users\\sami-_000\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sami-_000\\Documents\\workspace-visual\\.NET\\AppTagger\\AppTaggerTest\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\X\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\sami-_000\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -27,8 +31,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "H:\\.NET-master\\AppTagger\\AppTagger\\AppTagger.csproj": {
-                "projectPath": "H:\\.NET-master\\AppTagger\\AppTagger\\AppTagger.csproj"
+              "C:\\Users\\sami-_000\\Documents\\workspace-visual\\.NET\\AppTagger\\AppTagger\\AppTagger.csproj": {
+                "projectPath": "C:\\Users\\sami-_000\\Documents\\workspace-visual\\.NET\\AppTagger\\AppTagger\\AppTagger.csproj"
               }
             }
           }
@@ -74,16 +78,16 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "H:\\.NET-master\\AppTagger\\AppTagger\\AppTagger.csproj": {
+    "C:\\Users\\sami-_000\\Documents\\workspace-visual\\.NET\\AppTagger\\AppTagger\\AppTagger.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\.NET-master\\AppTagger\\AppTagger\\AppTagger.csproj",
+        "projectUniqueName": "C:\\Users\\sami-_000\\Documents\\workspace-visual\\.NET\\AppTagger\\AppTagger\\AppTagger.csproj",
         "projectName": "AppTagger",
-        "projectPath": "H:\\.NET-master\\AppTagger\\AppTagger\\AppTagger.csproj"
+        "projectPath": "C:\\Users\\sami-_000\\Documents\\workspace-visual\\.NET\\AppTagger\\AppTagger\\AppTagger.csproj"
       },
       "frameworks": {
         "net472": {}

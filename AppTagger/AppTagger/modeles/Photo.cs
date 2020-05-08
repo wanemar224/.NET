@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace AppTagger.modeles
@@ -17,6 +18,24 @@ namespace AppTagger.modeles
         public Photo() 
         {
             this._tags = new List<int>();
+        }
+
+        public Photo(string cheminComplet)
+        {
+            this._tags = new List<int>();
+            string[] chemin = cheminComplet.Split('\\');
+            if (chemin.Length > 0)
+            {
+                string c = "";
+                for (int i = 0; i < chemin.Length - 1; i++)
+                {
+                    c += chemin[i]+"\\";
+                }
+                this.CheminAbsolu = c;
+                this.Nom = chemin[chemin.Length - 1];
+            }
+           
+            
         }
         public Photo(string cheminAbsolu, string nom,  List<int> tags)
         {
@@ -35,7 +54,7 @@ namespace AppTagger.modeles
         public List<int> Tags
         {
             get { return this._tags; }
-            //private set { this._tags = value; }
+            private set { this._tags = value; }
         }
 
         public string  CheminAbsolu
@@ -52,7 +71,7 @@ namespace AppTagger.modeles
 
         public string Chemin
         {
-            get { return this.CheminAbsolu + "\\" + this.Nom; }
+            get { return this.CheminAbsolu + this.Nom; }
         }
 
         public void AjouterUnTag ( Tag tag )
@@ -63,7 +82,7 @@ namespace AppTagger.modeles
                 throw new Exception( "Tag existe déja !" );
         }
 
-        public void supprimerUnTag(Tag tag)
+        public void SupprimerUnTag(Tag tag)
         {
             if (this.Tags.Contains( tag.Id ))
                 this.Tags.Remove( tag.Id );
@@ -71,11 +90,36 @@ namespace AppTagger.modeles
                 throw new Exception( "Tag n'existe pas !" );
         }
 
+        public void RecupererTagDepuisFichier()
+        {
+            Image image = new Bitmap(this.Chemin);
+            PropertyItem item = image.PropertyItems [0];
+            item.Id = 0x9286;
+
+            string description = Encoding.UTF8.GetString(item.Value, 0, item.Value.Length);
+            this.Tags = RecupererIdTag(description);
+        }
+
+        private List<int> RecupererIdTag(string idTags)
+        {
+            string[] tags = idTags.Split(',');
+            List<int> res = new List<int>();
+            for (int i = 0; i < tags.Length - 1; i++)
+            {
+                StringBuilder s = new StringBuilder();
+
+                foreach (char c in tags[i])
+                {
+                    if (Regex.IsMatch(c.ToString(), "[0-9]"))
+                        s.Append(c.ToString());
+                }
+                res.Add(Convert.ToInt32(s.ToString()));
+            }
+            return res;
+        }
         public void EnregistrerTagDansFichier()
         {
             ASCIIEncoding encoding;
-
-
             Image image = new Bitmap( this.Chemin );
             PropertyItem item = image.PropertyItems [0];
             item.Id = 0x9286;
@@ -88,7 +132,6 @@ namespace AppTagger.modeles
                 ids += tag + ",";
             }
             var data = encoding.GetBytes( ids );
-
 
             item.Len = data.Length;
             item.Value.DefaultIfEmpty();
@@ -103,7 +146,7 @@ namespace AppTagger.modeles
 
         public void toString()
         {
-            Console.WriteLine( "chemin de la photo :" + this.CheminAbsolu + this.Nom);
+            Console.WriteLine( "chemin de la photo :" + this.Chemin);
             Console.Write( "tags : " );
             foreach(int tag in this.Tags)
             {
