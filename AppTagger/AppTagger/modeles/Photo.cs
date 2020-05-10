@@ -49,7 +49,7 @@ namespace AppTagger.modeles
 
         public Photo(string cheminAbsolu, string nom)
         {
-            this._cheminAbsolu = cheminAbsolu;
+            this._cheminAbsolu = cheminAbsolu+"\\";
             this._tags = new List<int>();
             this.Nom = nom;
         }

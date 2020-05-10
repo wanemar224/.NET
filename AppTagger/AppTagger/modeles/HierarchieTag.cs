@@ -49,27 +49,60 @@ namespace AppTagger.modeles
         }
         public Tag TrouveParNom(string nom)
         {
-            return TrouveParNom(this.root, nom);
+            Tag res = null; //new Tag( "pas bon", new Tag[]{ } ) ;
+            TrouveParNom(this.root, nom, out res);
+
+            if (res == null )
+                throw new Exception( "Tag non trouvé !" );
+            return res;
         }
-        private Tag TrouveParNom(Tag tag, string nom)
+        private void TrouveParNom(Tag tag, string nom,  out Tag res)
         {
-            if (tag.Nom.Equals(nom))
+            res = null;
+            Console.WriteLine( "pere $ " + tag.Nom + ", nom $ " + nom );
+            if (tag.Nom.Equals( nom ))
+            {
+                Console.WriteLine( "RENTRER DANS IF" );
+                res = tag;
+                Console.WriteLine( res.Nom );
+            }
+              
+            else
+            {
+                foreach (Tag fils in tag.Fils)
+                {
+                    TrouveParNom( fils, nom,  out res );
+                    if (res != null)
+                        break;
+                }
+            }
+           
+           
+
+        }
+
+        public Tag TrouveParId ( int id )
+        {
+            return TrouveParId( this.root,  id );
+        }
+
+        private Tag TrouveParId (Tag tag, int id )
+        {
+            if (tag.Id.Equals( id ))
                 return tag;
             Tag res = new Tag();
             foreach (Tag fils in tag.Fils)
             {
-                return TrouveParNom(fils, nom);
+                return TrouveParId( fils, id );
             }
             throw new Exception( "Tag non trouvé !" );
-
         }
-
         private Tag Trouve( Tag tag, Predicate<Tag> trouve)
         {
             return null;
         }
 
-        public void AjouterTag(string pere, string fils)
+       public void AjouterTag(string pere, string fils)
         {
             Tag f = new Tag(fils, new Tag[] { });
             Tag p = this.TrouveParNom(pere);

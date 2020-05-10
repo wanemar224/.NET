@@ -36,14 +36,12 @@ namespace AppTagger.modeles
         }
         public void AjouterPhoto(Photo photo)
         {
-            if (!Photos.Contains(photo))
-                this.Photos.Add(photo);
-            else
-                throw new ArgumentException("Cette photo existe déjà !");
+             this.Photos.Add(photo);
         }
         public void AjouterPhoto(string cheminAbsolu, string nom)
         {
-            this.AjouterPhoto(new Photo(cheminAbsolu, nom));
+            this.AjouterPhoto( new Photo( cheminAbsolu, nom ) );
+           
         }
         public void SupprimerPhoto(Photo photo)
         {

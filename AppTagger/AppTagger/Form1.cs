@@ -10,15 +10,25 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using AppTagger.controller;
+using AppTagger.modeles;
 
 namespace AppTagger
 {
     public partial class Form1 : Form
     {
+        Controleur controleur;
         static int i = 0;
         public Form1 ( )
         {
             InitializeComponent();
+            controleur = new Controleur();
+            this.MiseAJourImageList();
+            this.MiseAJourTagList();
+            controleur.MiseAjourTreeView(this.treeView1);
+
+
+
         }
 
         private void ChargeeImages_Click ( object sender, EventArgs e )
@@ -29,34 +39,114 @@ namespace AppTagger
                 {
                     foreach (string f in ofd.FileNames)
                     {
-
-                        imageList1.Images.Add( Image.FromFile( f ) );
-                        ListViewItem item = new ListViewItem();
-                        item.Text = Path.GetFileName( f );
-                        item.ImageIndex = i++;
-                        listView1.Items.Add( item );
-
-
+                        Console.WriteLine( f );
+                        AjoutePhoto( f );
 
                     }
                 }
             }
 
         }
+        private void AjoutePhoto(string chemin )
+        {
+            Console.WriteLine( chemin );
+            controleur.AjoutePhoto( chemin );
+            this.MiseAJourImageList();
 
-     
+        }
+
+        private void MiseAJourImageList ( )
+        {
+            imageList1.Images.Clear();
+            listView1.Items.Clear();
+            Form1.i = 0;
+            foreach(string chemin in controleur.ListPhoto)
+            {
+                imageList1.Images.Add( Path.GetFileName(chemin), Image.FromFile( chemin ) );
+                ListViewItem item = new ListViewItem();
+                item.Text = Path.GetFileName( chemin );
+                item.ImageIndex = i++;
+                listView1.Items.Add( item );       
+            }
+        }
+
+        private void MiseAJourTagList ( )
+        {
+            checkedListBox1.Items.Clear();
+            comboBox1.Items.Clear();
+            List<string> tags = controleur.GetTagList();
+            foreach(string tag in tags)
+            {
+                comboBox1.Items.Add( tag );
+                checkedListBox1.Items.Add( tag );
+            }
+
+        }
+
+ 
+
+
         private void listView1_SelectedIndexChanged ( object sender, EventArgs e )
         {
             int i = this.listView1.FocusedItem.Index;
+            string chemin = this.controleur.TrouvePhotoParNom(this.listView1.Items [i].Text);
+           // string chemin = this.imageList1.Images[i].
+            this.pictureBox1.Image = Image.FromFile(chemin);
+            string s = controleur.GetTagPhoto( chemin );
+            chaineTag.Text = "Tags : " + s;
 
-            this.pictureBox1.Image = this.imageList1.Images [i];
+           
+
         }
 
         private void pictureBox1_Click ( object sender, EventArgs e )
         {
-            Console.WriteLine( this.pictureBox1.Image.Width + "x" + this.pictureBox1.Image.Height );
-       
+          
 
+        }
+
+        private void supprimer_Click ( object sender, EventArgs e )
+        {
+           foreach( ListViewItem item in this.listView1.SelectedItems)
+           {
+                this.SupprimerPhoto( item.Text );
+           }
+           //pictureBox1.
+        }
+
+        private void SupprimerPhoto(string nom ) 
+        {
+            controleur.SupprimerPhoto( nom );
+            this.MiseAJourImageList();
+        }
+
+        private void comboBox1_SelectedIndexChanged ( object sender, EventArgs e )
+        {
+           
+        }
+
+        private void checkedListBox1_SelectedIndexChanged ( object sender, EventArgs e )
+        {
+            
+        }
+
+        private void Form1_Load ( object sender, EventArgs e )
+        {
+
+        }
+
+        private void AjouterTag_Click ( object sender, EventArgs e )
+        {
+            try
+            {
+                controleur.AjouterTagHierarchi( treeView1.SelectedNode.Text, TextAjouterTag.Text );
+                controleur.MiseAjourTreeView( this.treeView1 );
+                this.MiseAJourTagList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show( ex.Message );
+            }
         }
     }
 }

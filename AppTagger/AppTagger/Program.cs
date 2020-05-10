@@ -22,8 +22,23 @@ namespace AppTagger
         [STAThread]
         static void Main ( )
         {
+            /*HierarchieTag ht = HierarchieTag.Instance;
+            //ht.Charger();
+            ht.Hierarchi.Affiche("");
+            ht.AjouterTag("root", "vacances");
+            ht.AjouterTag( "vacances", "marseille" );
 
-            Galerie g = Galerie.Instance;
+            ht.AjouterTag( "marseille", "OM" );
+            ht.AjouterTag( "root", "famille" );
+            ht.AjouterTag( "famille", "brahim" );
+           // ht.TrouveParNom( "bali" ).AjouterFils( new Tag( "grece", new Tag [] { } ) );
+            ht.Hierarchi.Affiche("");
+            ht.Sauvegarder();*/
+
+            /*
+             * List<Photo> test = new List<Photo> {new Photo( @"..\..\galerie", "panda.jpg" ), new Photo( @"..\..\galerie", "lune.jpg" ) };
+            Console.WriteLine( !test.Exists( p => p.Nom.Equals("panda.jpg") ) );
+             * Galerie g = Galerie.Instance;
             HierarchieTag ht = HierarchieTag.Instance;
             try
             {
@@ -40,7 +55,7 @@ namespace AppTagger
             catch (Exception ex)
             {
                 Console.WriteLine( ex.Message );
-            }
+            }*/
 
             /*ht.AjouterTag( "root", "vacances" );
             ht.AjouterTag( "root", "famille" );
