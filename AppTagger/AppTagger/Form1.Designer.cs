@@ -53,6 +53,7 @@
             this.TextModifierTag = new System.Windows.Forms.TextBox();
             this.TextAjouterTag = new System.Windows.Forms.TextBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.TableauDeControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -174,9 +175,8 @@
             this.chaineTag.AutoSize = true;
             this.chaineTag.Location = new System.Drawing.Point(289, 545);
             this.chaineTag.Name = "chaineTag";
-            this.chaineTag.Size = new System.Drawing.Size(29, 13);
+            this.chaineTag.Size = new System.Drawing.Size(0, 13);
             this.chaineTag.TabIndex = 15;
-            this.chaineTag.Text = "tiens";
             // 
             // AjouterTagAImage
             // 
@@ -295,6 +295,11 @@
             this.treeView1.Size = new System.Drawing.Size(342, 370);
             this.treeView1.TabIndex = 28;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1259, 667);
@@ -344,6 +349,7 @@
         private System.Windows.Forms.TextBox TextModifierTag;
         private System.Windows.Forms.TextBox TextAjouterTag;
         private System.Windows.Forms.Button SupprimerTagImage;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
 

@@ -78,6 +78,17 @@ namespace AppTagger.modeles
                 throw new Exception( "Tag non trouvé !" );
             return res;
         }
+        public bool EstPresentDansFils(string pere, string tagAVerifier)
+        {
+            Console.WriteLine( "tag :" + pere + " , tag a vérifier :" + tagAVerifier );
+            Tag t = this.TrouveParNom( pere );
+            Tag res = null;
+            Trouve<string>( t, CompareNom, tagAVerifier, out res );
+            if (res == null)
+                return false;
+            Console.WriteLine( "TROUVER" );
+            return true;
+        }
         private void Trouve<T>( Tag tag, Compare<T> comparer, T element, out Tag res)
         {
             res = null;

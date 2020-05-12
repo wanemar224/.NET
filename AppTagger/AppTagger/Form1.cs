@@ -23,7 +23,7 @@ namespace AppTagger
         {
             InitializeComponent();
             controleur = new Controleur();
-            this.MiseAJourImageList();
+            this.MiseAJourListView(controleur.ListPhoto);
             this.MiseAJourTagList();
             controleur.MiseAjourTreeView(this.treeView1);
 
@@ -51,22 +51,30 @@ namespace AppTagger
         {
             Console.WriteLine( chemin );
             controleur.AjoutePhoto( chemin );
-            this.MiseAJourImageList();
+            this.MiseAJourListView(controleur.ListPhoto);
 
         }
 
-        private void MiseAJourImageList ( )
+        private void MiseAjourListView ( )
+        {           
+            if (checkedListBox1.CheckedItems.Count == 0)
+                MiseAJourListView( controleur.ListPhoto );
+            else MiseAJourListView( controleur.ListPhotoFiltre(checkedListBox1 ));
+        }
+
+        private void MiseAJourListView ( List<string> listPhoto )
         {
             imageList1.Images.Clear();
             listView1.Items.Clear();
             Form1.i = 0;
-            foreach(string chemin in controleur.ListPhoto)
+            foreach (string chemin in listPhoto)
             {
-                imageList1.Images.Add( Path.GetFileName(chemin), Image.FromFile( chemin ) );
+                imageList1.Images.Add( Path.GetFileName( chemin ), Image.FromFile( chemin ) );
                 ListViewItem item = new ListViewItem();
                 item.Text = Path.GetFileName( chemin );
                 item.ImageIndex = i++;
-                listView1.Items.Add( item );       
+                listView1.Items.Add( item );
+
             }
             controleur.Sauvegarder();
         }
@@ -84,10 +92,12 @@ namespace AppTagger
             controleur.Sauvegarder();
         }
 
-        private void MiseAJourLabelTag(string nom )
+        private void MiseAJourLabelTag(string chemin )
         {
-            string s = controleur.GetTagPhoto( nom );
-            chaineTag.Text = "Tags : " + s;
+            chaineTag.Text = "Tags : ";
+            List<string> s = controleur.GetTagPhoto( Path.GetFileName( chemin ) );
+            foreach (string tag in s)
+                chaineTag.Text +=  tag+",";
         }
 
  
@@ -97,10 +107,11 @@ namespace AppTagger
         {
             int i = this.listView1.FocusedItem.Index;
             string chemin = this.controleur.TrouvePhotoParNom(this.listView1.Items [i].Text);
+            
            // string chemin = this.imageList1.Images[i].
             this.pictureBox1.Image = Image.FromFile(chemin);
-            string s = controleur.GetTagPhoto( Path.GetFileName(chemin ));
-            chaineTag.Text = "Tags : " + s;
+            MiseAJourLabelTag(chemin);
+            
 
         }
 
@@ -121,7 +132,7 @@ namespace AppTagger
         private void SupprimerPhoto(string nom ) 
         {
             controleur.SupprimerPhoto( nom );
-            this.MiseAJourImageList();
+            this.MiseAJourListView(controleur.ListPhoto);
         }
 
         private void comboBox1_SelectedIndexChanged ( object sender, EventArgs e )
@@ -131,18 +142,8 @@ namespace AppTagger
 
         private void checkedListBox1_SelectedIndexChanged ( object sender, EventArgs e )
         {
-            // parcour les tags selectionnés pour le filtre
-            for( int i = 0; i<checkedListBox1.SelectedItems.Count; i++)
-            {
-                //parcour les itemes(photo) de la listView
-                foreach(ListViewItem photo in listView1.Items)
-                {
-                    //parcours: chaque tag associé à photo, si il est égale à tag sélectionné ou il est fils de tag sélectionnée.
-                    //if(!controleur.FiltreParTag( photo.Text ))
-                       
-                    
-                }
-            }
+            
+            MiseAjourListView();
         }
 
         private void Form1_Load ( object sender, EventArgs e )
@@ -171,7 +172,8 @@ namespace AppTagger
                 controleur.AjouterTagDansPhoto( this.listView1.Items [this.listView1.FocusedItem.Index].Text, comboBox1.SelectedItem.ToString() );
                 int i = this.listView1.FocusedItem.Index;
                 string chemin = this.controleur.TrouvePhotoParNom( this.listView1.Items [i].Text );
-                this.MiseAJourLabelTag( Path.GetFileName( chemin ) );
+                this.MiseAJourLabelTag( chemin );
+                
             }
             catch(Exception ex)
             {
@@ -188,7 +190,7 @@ namespace AppTagger
                 controleur.SupprimerUnTagDansPhoto( this.listView1.Items [this.listView1.FocusedItem.Index].Text, comboBox1.SelectedItem.ToString() );
                 int i = this.listView1.FocusedItem.Index;
                 string chemin = this.controleur.TrouvePhotoParNom( this.listView1.Items [i].Text );
-                this.MiseAJourLabelTag( Path.GetFileName( chemin ) );
+                this.MiseAJourLabelTag(  chemin );
             }
             catch(Exception ex)
             {

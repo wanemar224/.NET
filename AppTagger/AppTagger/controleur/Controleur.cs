@@ -95,6 +95,35 @@ namespace AppTagger.controller
            
         }
 
+        public List<string> ListPhotoFiltre(CheckedListBox checkedList)
+        {
+          
+            List<string> lpf = new List<string>();
+            foreach (Photo photo in Galerie.Instance.Photos)
+            {
+                for (int i = 0; i < checkedList.CheckedItems.Count; i++)
+                    foreach(string tag in GetTagPhoto(photo.Nom))
+                        if (EstPresent( checkedList.CheckedItems [i].ToString(), Path.GetFileName( tag ) ))
+                        {
+                            if(!lpf.Contains(photo.Chemin))
+                                lpf.Add( photo.Chemin );
+
+                        }
+                           
+            }
+            return lpf;
+            
+
+        }
+
+        internal bool EstPresent ( string tag, string tagAVerifier )
+        {
+            Console.WriteLine( "tag :" + tag + " , tag a vérifier :" + tagAVerifier );
+            if (tag.Equals( tagAVerifier ))
+                return true;
+            return HierarchieTag.Instance.EstPresentDansFils( tag, tagAVerifier );
+        }
+
         public List<string> GetTagList ( )
         {
             Tag t = HierarchieTag.Instance.Hierarchi;
@@ -105,17 +134,16 @@ namespace AppTagger.controller
             return listeTags;
         }
 
-        public string GetTagPhoto(string nom )
+        public List<string> GetTagPhoto(string nom )
         {
-            StringBuilder s = new StringBuilder();
+            List<string>  s = new List<string>();
             List<int> tags = Galerie.Instance.TrouverPhoto( nom ).Tags;
             foreach(int tag in tags)
             {
-                s.Append( HierarchieTag.Instance.TrouveParId( tag ).Nom );
-                s.Append( ", " );
+                s.Add( HierarchieTag.Instance.TrouveParId( tag ).Nom );
             }
 
-            return s.ToString();
+            return s;
         }
         private void ConstruireList(List<string> liste , Tag t )
         {
