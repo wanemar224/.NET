@@ -60,6 +60,7 @@ namespace AppTagger
                 throw new Exception( "Ce tag existe déjà !" );
         }
 
+     
         private bool EstPresent(Tag tag)
         {
             for(int i=0; i<this.Fils.Length; i++)

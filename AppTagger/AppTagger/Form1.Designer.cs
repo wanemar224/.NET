@@ -42,10 +42,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.chaineTag = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.AjouterTagAImage = new System.Windows.Forms.Button();
             this.TableauDeControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.SupprimerTagImage = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.ModifierTag = new System.Windows.Forms.Button();
@@ -68,13 +69,12 @@
             this.listView1.Size = new System.Drawing.Size(263, 518);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.SmallIcon;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // imageList1
             // 
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(100, 100);
+            this.imageList1.ImageSize = new System.Drawing.Size(50, 50);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // ChargeeImages
@@ -118,7 +118,10 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.Location = new System.Drawing.Point(11, 76);
+            this.comboBox1.DropDownHeight = 200;
+            this.comboBox1.IntegralHeight = false;
+            this.comboBox1.ItemHeight = 13;
+            this.comboBox1.Location = new System.Drawing.Point(11, 74);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(304, 21);
             this.comboBox1.TabIndex = 28;
@@ -127,7 +130,7 @@
             // 
             this.AjouterTag.Location = new System.Drawing.Point(259, 382);
             this.AjouterTag.Name = "AjouterTag";
-            this.AjouterTag.Size = new System.Drawing.Size(75, 23);
+            this.AjouterTag.Size = new System.Drawing.Size(89, 23);
             this.AjouterTag.TabIndex = 6;
             this.AjouterTag.Text = "Ajouter";
             this.AjouterTag.UseVisualStyleBackColor = true;
@@ -137,7 +140,7 @@
             // 
             this.SupprimerTag.Location = new System.Drawing.Point(259, 440);
             this.SupprimerTag.Name = "SupprimerTag";
-            this.SupprimerTag.Size = new System.Drawing.Size(75, 23);
+            this.SupprimerTag.Size = new System.Drawing.Size(89, 23);
             this.SupprimerTag.TabIndex = 7;
             this.SupprimerTag.Text = "supprimer";
             this.SupprimerTag.UseVisualStyleBackColor = true;
@@ -145,9 +148,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(6, 82);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.Size = new System.Drawing.Size(49, 20);
             this.label1.TabIndex = 50;
             this.label1.Text = "Filtrer";
             // 
@@ -174,14 +178,15 @@
             this.chaineTag.TabIndex = 15;
             this.chaineTag.Text = "tiens";
             // 
-            // button1
+            // AjouterTagAImage
             // 
-            this.button1.Location = new System.Drawing.Point(11, 103);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(304, 33);
-            this.button1.TabIndex = 26;
-            this.button1.Text = "Ajouter";
-            this.button1.UseVisualStyleBackColor = true;
+            this.AjouterTagAImage.Location = new System.Drawing.Point(11, 113);
+            this.AjouterTagAImage.Name = "AjouterTagAImage";
+            this.AjouterTagAImage.Size = new System.Drawing.Size(100, 40);
+            this.AjouterTagAImage.TabIndex = 26;
+            this.AjouterTagAImage.Text = "Ajouter";
+            this.AjouterTagAImage.UseVisualStyleBackColor = true;
+            this.AjouterTagAImage.Click += new System.EventHandler(this.AjouterTagAImage_Click);
             // 
             // TableauDeControl
             // 
@@ -211,8 +216,9 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.SupprimerTagImage);
             this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.AjouterTagAImage);
             this.tabPage2.Controls.Add(this.comboBox1);
             this.tabPage2.Location = new System.Drawing.Point(4, 36);
             this.tabPage2.Name = "tabPage2";
@@ -222,15 +228,25 @@
             this.tabPage2.Text = "Gestion Images";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // SupprimerTagImage
+            // 
+            this.SupprimerTagImage.Location = new System.Drawing.Point(227, 113);
+            this.SupprimerTagImage.Name = "SupprimerTagImage";
+            this.SupprimerTagImage.Size = new System.Drawing.Size(88, 40);
+            this.SupprimerTagImage.TabIndex = 29;
+            this.SupprimerTagImage.Text = "Supprimer";
+            this.SupprimerTagImage.UseVisualStyleBackColor = true;
+            this.SupprimerTagImage.Click += new System.EventHandler(this.SupprimerTagImage_Click);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 18);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(7, 14);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(152, 25);
+            this.label4.Size = new System.Drawing.Size(320, 24);
             this.label4.TabIndex = 27;
-            this.label4.Text = "Ajouter un tag ";
+            this.label4.Text = "Ajouter un tag à l\'image selectionnée";
             // 
             // tabPage3
             // 
@@ -252,23 +268,24 @@
             // 
             this.ModifierTag.Location = new System.Drawing.Point(259, 411);
             this.ModifierTag.Name = "ModifierTag";
-            this.ModifierTag.Size = new System.Drawing.Size(75, 23);
+            this.ModifierTag.Size = new System.Drawing.Size(89, 23);
             this.ModifierTag.TabIndex = 31;
             this.ModifierTag.Text = "Modifier";
             this.ModifierTag.UseVisualStyleBackColor = true;
+            this.ModifierTag.Click += new System.EventHandler(this.ModifierTag_Click);
             // 
             // TextModifierTag
             // 
-            this.TextModifierTag.Location = new System.Drawing.Point(22, 408);
+            this.TextModifierTag.Location = new System.Drawing.Point(6, 408);
             this.TextModifierTag.Name = "TextModifierTag";
-            this.TextModifierTag.Size = new System.Drawing.Size(219, 20);
+            this.TextModifierTag.Size = new System.Drawing.Size(235, 20);
             this.TextModifierTag.TabIndex = 30;
             // 
             // TextAjouterTag
             // 
-            this.TextAjouterTag.Location = new System.Drawing.Point(22, 382);
+            this.TextAjouterTag.Location = new System.Drawing.Point(6, 382);
             this.TextAjouterTag.Name = "TextAjouterTag";
-            this.TextAjouterTag.Size = new System.Drawing.Size(219, 20);
+            this.TextAjouterTag.Size = new System.Drawing.Size(235, 20);
             this.TextAjouterTag.TabIndex = 29;
             // 
             // treeView1
@@ -285,6 +302,8 @@
             this.Controls.Add(this.chaineTag);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.listView1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -314,7 +333,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label chaineTag;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button AjouterTagAImage;
         private System.Windows.Forms.TabControl TableauDeControl;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -324,6 +343,7 @@
         private System.Windows.Forms.Button ModifierTag;
         private System.Windows.Forms.TextBox TextModifierTag;
         private System.Windows.Forms.TextBox TextAjouterTag;
+        private System.Windows.Forms.Button SupprimerTagImage;
     }
 }
 

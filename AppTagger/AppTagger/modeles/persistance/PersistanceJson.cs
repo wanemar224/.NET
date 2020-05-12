@@ -14,24 +14,24 @@ namespace AppTagger.modeles.persistance
         const string CHEMINPHOTOS = @"..\..\bdd\photos.json";
         public List<string> ChargerGalerie()
         {
-            if(File.Exists(CHEMINPHOTOS))
-            {
-                string contenu = File.ReadAllText( CHEMINPHOTOS );
-                return JsonConvert.DeserializeObject<List<string>>( contenu );
-            }
-            throw new FileNotFoundException();
-            
+            if(!File.Exists(CHEMINPHOTOS))
+                this.SauvegarderGalerie( new List<string>( ));
+
+            string contenu = File.ReadAllText( CHEMINPHOTOS );
+            return JsonConvert.DeserializeObject<List<string>>( contenu );
+
         }
 
         public Tag ChargerHierarchie()
         {
-            if (File.Exists( CHEMINHIERARCHIE ))
+            if (!File.Exists( CHEMINHIERARCHIE ))
             {
-                string contenu = File.ReadAllText( CHEMINHIERARCHIE );
-                if (contenu.Length == 0)
-                    throw new Exception( "fichier vide" );
-                return JsonConvert.DeserializeObject<Tag>( contenu );
+                this.SauvergarderHierarchie( HierarchieTag.Instance.Hierarchi );
             }
+            string contenu = File.ReadAllText( CHEMINHIERARCHIE );
+            if (contenu.Length == 0)
+                throw new Exception( "fichier vide" );
+            return JsonConvert.DeserializeObject<Tag>( contenu );
             throw new FileNotFoundException();
         }
 

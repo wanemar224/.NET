@@ -68,6 +68,7 @@ namespace AppTagger
                 item.ImageIndex = i++;
                 listView1.Items.Add( item );       
             }
+            controleur.Sauvegarder();
         }
 
         private void MiseAJourTagList ( )
@@ -80,7 +81,13 @@ namespace AppTagger
                 comboBox1.Items.Add( tag );
                 checkedListBox1.Items.Add( tag );
             }
+            controleur.Sauvegarder();
+        }
 
+        private void MiseAJourLabelTag(string nom )
+        {
+            string s = controleur.GetTagPhoto( nom );
+            chaineTag.Text = "Tags : " + s;
         }
 
  
@@ -92,17 +99,14 @@ namespace AppTagger
             string chemin = this.controleur.TrouvePhotoParNom(this.listView1.Items [i].Text);
            // string chemin = this.imageList1.Images[i].
             this.pictureBox1.Image = Image.FromFile(chemin);
-            string s = controleur.GetTagPhoto( chemin );
+            string s = controleur.GetTagPhoto( Path.GetFileName(chemin ));
             chaineTag.Text = "Tags : " + s;
-
-           
 
         }
 
         private void pictureBox1_Click ( object sender, EventArgs e )
         {
           
-
         }
 
         private void supprimer_Click ( object sender, EventArgs e )
@@ -127,7 +131,18 @@ namespace AppTagger
 
         private void checkedListBox1_SelectedIndexChanged ( object sender, EventArgs e )
         {
-            
+            // parcour les tags selectionnés pour le filtre
+            for( int i = 0; i<checkedListBox1.SelectedItems.Count; i++)
+            {
+                //parcour les itemes(photo) de la listView
+                foreach(ListViewItem photo in listView1.Items)
+                {
+                    //parcours: chaque tag associé à photo, si il est égale à tag sélectionné ou il est fils de tag sélectionnée.
+                    //if(!controleur.FiltreParTag( photo.Text ))
+                       
+                    
+                }
+            }
         }
 
         private void Form1_Load ( object sender, EventArgs e )
@@ -140,6 +155,52 @@ namespace AppTagger
             try
             {
                 controleur.AjouterTagHierarchi( treeView1.SelectedNode.Text, TextAjouterTag.Text );
+                controleur.MiseAjourTreeView( this.treeView1 );
+                this.MiseAJourTagList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show( ex.Message );
+            }
+        }
+
+        private void AjouterTagAImage_Click ( object sender, EventArgs e )
+        {
+            try
+            {
+                controleur.AjouterTagDansPhoto( this.listView1.Items [this.listView1.FocusedItem.Index].Text, comboBox1.SelectedItem.ToString() );
+                int i = this.listView1.FocusedItem.Index;
+                string chemin = this.controleur.TrouvePhotoParNom( this.listView1.Items [i].Text );
+                this.MiseAJourLabelTag( Path.GetFileName( chemin ) );
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show( "Veuillez sélectionner un tag et une image s'il vous plaît !");
+            }
+            
+           
+        }
+
+        private void SupprimerTagImage_Click ( object sender, EventArgs e )
+        {
+            try
+            {
+                controleur.SupprimerUnTagDansPhoto( this.listView1.Items [this.listView1.FocusedItem.Index].Text, comboBox1.SelectedItem.ToString() );
+                int i = this.listView1.FocusedItem.Index;
+                string chemin = this.controleur.TrouvePhotoParNom( this.listView1.Items [i].Text );
+                this.MiseAJourLabelTag( Path.GetFileName( chemin ) );
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show( ex.Message );
+            }
+        }
+
+        private void ModifierTag_Click ( object sender, EventArgs e )
+        {
+            try
+            {
+                controleur.ModifierTagDansHierarchi( treeView1.SelectedNode.Text, TextModifierTag.Text );
                 controleur.MiseAjourTreeView( this.treeView1 );
                 this.MiseAJourTagList();
             }

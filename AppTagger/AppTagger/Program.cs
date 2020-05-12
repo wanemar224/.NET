@@ -22,18 +22,12 @@ namespace AppTagger
         [STAThread]
         static void Main ( )
         {
-            /*HierarchieTag ht = HierarchieTag.Instance;
-            //ht.Charger();
-            ht.Hierarchi.Affiche("");
-            ht.AjouterTag("root", "vacances");
-            ht.AjouterTag( "vacances", "marseille" );
-
-            ht.AjouterTag( "marseille", "OM" );
-            ht.AjouterTag( "root", "famille" );
-            ht.AjouterTag( "famille", "brahim" );
+           /* HierarchieTag ht = HierarchieTag.Instance;
+            ht.Charger();
+            ht.Hierarchi.Affiche("");*/
+           
            // ht.TrouveParNom( "bali" ).AjouterFils( new Tag( "grece", new Tag [] { } ) );
-            ht.Hierarchi.Affiche("");
-            ht.Sauvegarder();*/
+          
 
             /*
              * List<Photo> test = new List<Photo> {new Photo( @"..\..\galerie", "panda.jpg" ), new Photo( @"..\..\galerie", "lune.jpg" ) };

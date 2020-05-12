@@ -64,6 +64,19 @@ namespace AppTagger.controller
             
         }
 
+        public void ModifierTagDansHierarchi(string tag, string nouveauNom)
+        {
+            HierarchieTag.Instance.TrouveParNom( tag ).Nom = nouveauNom;
+        }
+        public void AjouterTagDansPhoto(string nomPhoto, string tag)
+        {
+            Galerie.Instance.TrouverPhoto( nomPhoto ).AjouterUnTag( HierarchieTag.Instance.TrouveParNom( tag ) );
+        }
+
+        public void SupprimerUnTagDansPhoto( string nomPhoto, string tag )
+        {
+            Galerie.Instance.TrouverPhoto( nomPhoto ).SupprimerUnTag( HierarchieTag.Instance.TrouveParNom( tag ) );
+        }
         public void SupprimerPhoto(string nom)
         {
             Galerie.Instance.SupprimerPhoto( Galerie.Instance.TrouverPhoto( nom ) );
@@ -79,6 +92,7 @@ namespace AppTagger.controller
                 }
                 return lp;
             }
+           
         }
 
         public List<string> GetTagList ( )
@@ -91,10 +105,10 @@ namespace AppTagger.controller
             return listeTags;
         }
 
-        public string GetTagPhoto(string chemin )
+        public string GetTagPhoto(string nom )
         {
             StringBuilder s = new StringBuilder();
-            List<int> tags = Galerie.Instance.TrouverPhoto( Path.GetFileName( chemin ) ).Tags;
+            List<int> tags = Galerie.Instance.TrouverPhoto( nom ).Tags;
             foreach(int tag in tags)
             {
                 s.Append( HierarchieTag.Instance.TrouveParId( tag ).Nom );
@@ -110,6 +124,11 @@ namespace AppTagger.controller
             {
                 ConstruireList( liste, tag );
             }
+        }
+        public void Sauvegarder ( )
+        {
+            HierarchieTag.Instance.Sauvegarder();
+            Galerie.Instance.Sauvegarder();
         }
     }
 }

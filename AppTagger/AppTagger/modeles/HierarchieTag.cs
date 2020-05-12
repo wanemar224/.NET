@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace AppTagger.modeles
 {
-    public sealed class HierarchieTag 
+    public sealed class HierarchieTag
     {
         Tag root;
-        private HierarchieTag() 
-        { 
-            this.root = new Tag("root", new Tag [] { } );
+        private HierarchieTag ( )
+        {
+            this.root = new Tag( "root", new Tag [] { } );
         }
 
         public static HierarchieTag Instance { get { return Nested.instance; } }
@@ -24,11 +24,11 @@ namespace AppTagger.modeles
         public Tag Hierarchi { get { return root; } set { root = (Tag)value.Clone(); } }
         private class Nested
         {
-            static Nested() { }
+            static Nested ( ) { }
             internal static readonly HierarchieTag instance = new HierarchieTag();
         }
 
-        public void Charger()
+        public void Charger ( )
         {
             try
             {
@@ -39,67 +39,63 @@ namespace AppTagger.modeles
             {
                 throw ex;
             }
-            
+
         }
 
-        public void Sauvegarder()
+        public void Sauvegarder ( )
         {
             Persistance p = new PersistanceJson();
-            p.SauvergarderHierarchie(this.root);
+            p.SauvergarderHierarchie( this.root );
         }
+
+        
         public Tag TrouveParNom(string nom)
         {
-            Tag res = null; //new Tag( "pas bon", new Tag[]{ } ) ;
-            TrouveParNom(this.root, nom, out res);
+            return Trouve<string>( nom, CompareNom );
+        }
 
-            if (res == null )
+
+        public Tag TrouveParId ( int id )
+        {
+            return this.Trouve<int>( id, CompareID );
+        }
+
+        delegate bool Compare<T> ( Tag tag, T element);
+        bool CompareNom(Tag tag, string nom2 )
+        {
+            return tag.Nom.Equals( nom2 );
+        }
+        bool CompareID(Tag tag, int id)
+        {
+            return tag.Id == id;
+        }
+        private Tag Trouve<T> (T element, Compare<T>comparer )
+        {
+            Tag res = null; 
+            Trouve<T>( this.root, comparer, element, out res );
+
+            if (res == null)
                 throw new Exception( "Tag non trouvé !" );
             return res;
         }
-        private void TrouveParNom(Tag tag, string nom,  out Tag res)
+        private void Trouve<T>( Tag tag, Compare<T> comparer, T element, out Tag res)
         {
             res = null;
-            Console.WriteLine( "pere $ " + tag.Nom + ", nom $ " + nom );
-            if (tag.Nom.Equals( nom ))
+
+            if (comparer(tag, element))
             {
-                Console.WriteLine( "RENTRER DANS IF" );
                 res = tag;
-                Console.WriteLine( res.Nom );
             }
-              
+
             else
             {
                 foreach (Tag fils in tag.Fils)
                 {
-                    TrouveParNom( fils, nom,  out res );
+                    Trouve<T>( fils, comparer, element, out res );
                     if (res != null)
                         break;
                 }
             }
-           
-           
-
-        }
-
-        public Tag TrouveParId ( int id )
-        {
-            return TrouveParId( this.root,  id );
-        }
-
-        private Tag TrouveParId (Tag tag, int id )
-        {
-            if (tag.Id.Equals( id ))
-                return tag;
-            Tag res = new Tag();
-            foreach (Tag fils in tag.Fils)
-            {
-                return TrouveParId( fils, id );
-            }
-            throw new Exception( "Tag non trouvé !" );
-        }
-        private Tag Trouve( Tag tag, Predicate<Tag> trouve)
-        {
-            return null;
         }
 
        public void AjouterTag(string pere, string fils)
