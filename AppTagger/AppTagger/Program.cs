@@ -8,26 +8,35 @@ using System.Drawing.Imaging;
 using Newtonsoft.Json;
 using AppTagger.modeles;
 using System.IO;
-
+using System.Text;
 
 namespace AppTagger
 {
     static class Program
     {
 
-      
+        
         /// <summary>
         /// Point d'entrée principal de l'application.
         /// </summary>
         [STAThread]
         static void Main ( )
         {
-           /* HierarchieTag ht = HierarchieTag.Instance;
-            ht.Charger();
-            ht.Hierarchi.Affiche("");*/
-           
-           // ht.TrouveParNom( "bali" ).AjouterFils( new Tag( "grece", new Tag [] { } ) );
-          
+            /*Galerie g = Galerie.Instance;
+            g.Charger();
+            Photo p = g.TrouverPhoto( "panda.jpg" );
+            Console.WriteLine(p.Tags [0] );*/
+
+
+           // BitmapDecoder i = new BitmapDecoder
+
+
+            /* HierarchieTag ht = HierarchieTag.Instance;
+             ht.Charger();
+             ht.Hierarchi.Affiche("");*/
+
+            // ht.TrouveParNom( "bali" ).AjouterFils( new Tag( "grece", new Tag [] { } ) );
+
 
             /*
              * List<Photo> test = new List<Photo> {new Photo( @"..\..\galerie", "panda.jpg" ), new Photo( @"..\..\galerie", "lune.jpg" ) };
@@ -129,9 +138,9 @@ namespace AppTagger
             //Persistance.sauvegarderPhoto( p, @"C:\Users\sami-_000\Documents\workspace-visual\.NET\AppTagger\AppTagger\bdd\photos.json");
             //Persistance.chargerPhoto(@"C:\Users\sami-_000\Documents\workspace-visual\.NET\AppTagger\AppTagger\galerie\", "c_lune.jpg");
             //recupererRoot.Affiche( "" );
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault( false );
-            Application.Run( new Form1() );
+             Application.EnableVisualStyles();
+             Application.SetCompatibleTextRenderingDefault( false );
+             Application.Run( new Form1() );
 
 
         }

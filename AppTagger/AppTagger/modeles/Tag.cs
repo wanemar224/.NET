@@ -8,12 +8,9 @@ namespace AppTagger
 {
     public class Tag
     {
-        private static int _idSuivant = 0;
-
-        int _id;
-        string _nom;
-        Tag [] _fils;
-
+        static int _idSuivant = 0;
+        
+        //CONSTRUCTEUR
         public Tag ( string nom, Tag [] fils )
         {
             this.Id = IdSuivant();
@@ -64,14 +61,16 @@ namespace AppTagger
         private bool EstPresent(Tag tag)
         {
             for(int i=0; i<this.Fils.Length; i++)
-            {
                 if (this.Fils [i].Nom.Equals( tag.Nom ))
                     return true;
-            }
+
             return false;
         }
-        /////Propriété/////
 
+        //PROPRIETE
+        int _id;
+        string _nom;
+        Tag [] _fils;
         public int Id
         {
             get { return _id; }
@@ -88,6 +87,11 @@ namespace AppTagger
         {
             get { return _fils; }
             set { _fils = (Tag [])value.Clone(); }
+        }
+        internal static int IdSuivaant
+        {
+            get { return Tag._idSuivant; }
+            set { Tag._idSuivant = value; }
         }
     }
 }

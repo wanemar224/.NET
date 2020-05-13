@@ -13,5 +13,8 @@ namespace AppTagger.modeles.persistance
 
         List<string> ChargerGalerie();
         void SauvegarderGalerie(List<string> cheminsPhoto) ;
+
+        int ChargerIdSuivant ( );
+        void SauvegarderIdSuivant ( int idSuivant );
     }
 }

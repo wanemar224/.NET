@@ -145,6 +145,7 @@
             this.SupprimerTag.TabIndex = 7;
             this.SupprimerTag.Text = "supprimer";
             this.SupprimerTag.UseVisualStyleBackColor = true;
+            this.SupprimerTag.Click += new System.EventHandler(this.SupprimerTag_Click);
             // 
             // label1
             // 

@@ -12,10 +12,8 @@ namespace AppTagger.modeles
 {
     public class Photo
     {
-        private string _cheminAbsolu;
-        private string _nom;
-        private List<int> _tags;
-
+        
+        //CONSTRUCTEUR
         public Photo() 
         {
             this._tags = new List<int>();
@@ -35,9 +33,6 @@ namespace AppTagger.modeles
                 this.CheminAbsolu = c;
                 this.Nom = chemin[chemin.Length - 1];
             }
-
-
-
         }
         public Photo(string cheminAbsolu, string nom,  List<int> tags)
         {
@@ -54,6 +49,8 @@ namespace AppTagger.modeles
             this.Nom = nom;
         }
 
+
+        //METHODE
         private void EnregistrerMini()
         {
             Image image = new Bitmap( this.Chemin );
@@ -61,34 +58,7 @@ namespace AppTagger.modeles
             mini.Save( this.CheminMini, ImageFormat.Jpeg );
             image.Dispose();
             mini.Dispose();
-        }
-        public List<int> Tags
-        {
-            get { return this._tags; }
-            private set { this._tags = value; }
-        }
-
-        public string  CheminAbsolu
-        {
-            get { return this._cheminAbsolu; }
-            set { this._cheminAbsolu = value; }
-        }
-
-        public string Nom
-        {
-            get;
-            set;
-        }
-
-        public string Chemin
-        {
-            get { return this.CheminAbsolu + this.Nom; }
-        }
-
-        public string CheminMini
-        {
-            get { return this.CheminAbsolu + "mini_" + this.Nom; }
-        }
+        }       
 
         public void AjouterUnTag ( Tag tag )
         {
@@ -118,11 +88,10 @@ namespace AppTagger.modeles
                 this.Tags = RecupererIdTag( description );
                 image.Dispose();
             }
-            catch(FileNotFoundException ex)
+            catch(Exception ex)
             {
                 this.EnregistrerMini();
             }
-           
         }
 
         private List<int> RecupererIdTag(string idTags)
@@ -134,14 +103,34 @@ namespace AppTagger.modeles
                 StringBuilder s = new StringBuilder();
 
                 foreach (char c in tags[i])
-                {
                     if (Regex.IsMatch(c.ToString(), "[0-9]"))
                         s.Append(c.ToString());
+                try
+                {
+                    res.Add( Convert.ToInt32( s.ToString() ) );
                 }
-                res.Add(Convert.ToInt32(s.ToString()));
+                catch(Exception ex)
+                {}
             }
             return res;
         }
+
+        internal void MiseAJourTag ( )
+        {
+            List<int> nouveauTag = new List<int>();
+            foreach (int id in this.Tags)
+            {
+                try
+                {
+                    Tag t = HierarchieTag.Instance.TrouveParId( id );
+                    nouveauTag.Add( id );
+                }
+                catch (Exception ex)
+                { }
+            }
+            this.Tags = nouveauTag;
+        }
+
         public void EnregistrerTagDansFichier()
         {
             ASCIIEncoding encoding;
@@ -183,6 +172,39 @@ namespace AppTagger.modeles
                 Console.Write( tag + "," );
             }
             Console.Write("\n");
+        }
+
+        //PROPRIETE
+        private string _cheminAbsolu;
+        private string _nom;
+        private List<int> _tags;
+
+        public List<int> Tags
+        {
+            get { return this._tags; }
+            private set { this._tags = value; }
+        }
+
+        public string CheminAbsolu
+        {
+            get { return this._cheminAbsolu; }
+            set { this._cheminAbsolu = value; }
+        }
+
+        public string Nom
+        {
+            get;
+            set;
+        }
+
+        public string Chemin
+        {
+            get { return this.CheminAbsolu + this.Nom; }
+        }
+
+        public string CheminMini
+        {
+            get { return this.CheminAbsolu + "mini_" + this.Nom; }
         }
 
     }

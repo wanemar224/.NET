@@ -3,30 +3,8 @@
   "Nom": "root",
   "Fils": [
     {
-      "Id": 3,
-      "Nom": "famille",
-      "Fils": [
-        {
-          "Id": 5,
-          "Nom": "brahim",
-          "Fils": []
-        }
-      ]
-    },
-    {
       "Id": 4,
-      "Nom": "foret",
-      "Fils": [
-        {
-          "Id": 6,
-          "Nom": "arbre",
-          "Fils": []
-        }
-      ]
-    },
-    {
-      "Id": 7,
-      "Nom": "vacances",
+      "Nom": "espace",
       "Fils": []
     }
   ]

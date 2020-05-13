@@ -68,7 +68,6 @@
     </Compile>
     <Compile Include="modeles\Galerie.cs" />
     <Compile Include="modeles\HierarchieTag.cs" />
-    <Compile Include="modeles\Persist.cs" />
     <Compile Include="modeles\persistance\Persistance.cs" />
     <Compile Include="modeles\persistance\PersistanceJson.cs" />
     <Compile Include="modeles\Photo.cs" />
